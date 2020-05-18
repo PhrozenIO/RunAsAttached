@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/03/03 11:06:06.000.717,=C:\Users\PhrozenLab\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/04/30 15:03:58.000.912,=C:\Users\PhrozenLab\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/15 20:22:44.000.504,C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\RunAsAttached.dproj=C:\Users\PhrozenLab\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2020/05/15 20:42:17.000.757,=C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Unit1.pas</Transaction>
+    <Transaction>2020/05/15 20:42:25.000.739,C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Units\UntHandler.pas=C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Unit1.pas</Transaction>
+    <Transaction>2020/05/17 10:21:52.000.555,=C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Unit1.pas</Transaction>
+    <Transaction>2020/05/17 10:26:49.000.540,=C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Unit1.pas</Transaction>
+    <Transaction>2020/05/17 10:26:58.000.055,C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Unit1.pas=C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Units\UntTypeDefs.pas</Transaction>
+    <Transaction>2020/05/17 12:27:22.000.791,C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Units\UntHandler.pas=C:\Users\PhrozenLab\Desktop\Open Source Projects\RunAsAttached\Units\UntStdHandlers.pas</Transaction>
+  </Transactions>
+</BorlandProject>
