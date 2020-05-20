@@ -98,24 +98,11 @@ begin
       Exit();
     end;
 
-    if NOT SetHandleInformation(APipeOutRead, HANDLE_FLAG_INHERIT, 0) then begin
-      DumpLastError('SetHandleInformation(1)');
-
-      Exit();
-    end;
-
     if NOT CreatePipe(APipeInRead, APipeInWrite, @ASecAttribs, 0) then begin
       DumpLastError('CreatePipe(2)');
 
       Exit();
     end;
-
-    if NOT SetHandleInformation(APipeInWrite, HANDLE_FLAG_INHERIT, 0) then begin
-      DumpLastError('SetHandleInformation(2)');
-
-      Exit();
-    end;
-
     ///
     try
       AStartupInfo.cb          := SizeOf(TStartupInfo);
