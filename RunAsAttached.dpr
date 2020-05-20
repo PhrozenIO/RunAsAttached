@@ -37,13 +37,13 @@ uses
   UntStdHandlers in 'Units\UntStdHandlers.pas',
   UntTypeDefs in 'Units\UntTypeDefs.pas';
 
-var SET_USERNAME   : String = '';
-    SET_PASSWORD   : String = '';
-    SET_DOMAINNAME : String = '';
+var SET_USERNAME         : String = '';
+    SET_PASSWORD         : String = '';
+    SET_DOMAINNAME       : String = '';
 
-    LStdoutHandler : TStdoutHandler;
-    LStdinHandler  : TStdinHandler;
-    AExitCode      : Cardinal;
+    LStdoutHandler       : TStdoutHandler;
+    AExitCode            : Cardinal;
+    LCommand             : AnsiString;
 
 {-------------------------------------------------------------------------------
   Usage Banner
@@ -100,30 +100,49 @@ begin
     }
     try
       LStdoutHandler := TStdoutHandler.Create(SET_USERNAME, SET_PASSWORD, SET_DOMAINNAME);
-      LStdinHandler  := TStdinHandler.Create(LStdoutHandler.ThreadID);
-
-      LStdoutHandler.StdinThreadId := LStdInHandler.ThreadID;
       LStdoutHandler.Resume();
+      ///
 
       {
-         Stdout is our master
+        Wait for commands (stdin)
       }
-      WaitForSingleObject(LStdoutHandler.Handle, INFINITE); // or LStdoutHandler.WaitFor();
+      while True do begin
+        ReadLn(LCommand);
+        ///
+
+        LCommand := LCommand + #13#10;
+
+        {
+          We could replace "PostThreadMessage" by WriteFile directly from main thread.
+
+          We would just need to retrieve the "FPipeOutWrite" handle from StdHandler thread.
+        }
+        PostThreadMessage(
+                            LStdoutHandler.ThreadID,
+                            WM_COMMAND,
+                            NativeUInt(LCommand),
+                            (Length(LCommand) * SizeOf(AnsiChar))
+        );
+
+        {
+          Check if our StdHandler thread is still alive
+        }
+        GetExitCodeThread(LStdoutHandler.Handle, AExitCode);
+        if (AExitCode <> STILL_ACTIVE) then
+          break;
+      end;
 
       {
         Close secondary thread if not already
       }
-      GetExitCodeThread(LStdinHandler.Handle, AExitCode);
+      GetExitCodeThread(LStdoutHandler.Handle, AExitCode);
       if (AExitCode = STILL_ACTIVE) then begin
-        LStdinHandler.Terminate();
-        LStdinHandler.WaitFor();
+        LStdoutHandler.Terminate();
+        LStdoutHandler.WaitFor();
       end;
     finally
       if Assigned(LStdoutHandler) then
         FreeAndNil(LStdoutHandler);
-
-      if Assigned(LStdinHandler) then
-        FreeAndNIl(LStdinHandler);
     end;
   except
     on E: Exception do begin
